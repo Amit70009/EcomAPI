@@ -1,0 +1,123 @@
+const { ObjectID } = require("bson");
+var OrderSchema = require("../Create order/orderModel").OrderModel;
+var CommonFunc = require("../../Common Function/commonfunction");
+
+async function createOrder(data){
+    try {
+        var orderCheck = await OrderSchema.findOne({
+            order_id: data.order_id
+        })
+        if(orderCheck){
+            return{
+                status: 200,
+                message: "Order already exists with the same order id",
+                data: {orderCheck}
+            }
+        }
+         
+        var orderCreate = {
+            order_id: data.order_id,
+            order_status: data.order_status,
+            order_total_price: data.order_total_price,
+            order_user_id: data.order.order_user_id,
+            order_returned_on: data.order_returned_on,
+        }
+
+        await OrderSchema.create(orderCreate);
+            return{
+                status: 200,
+                message: "Order Created Successfully",
+                data: {orderCreate}
+            }
+     
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function UpdateOrder(OrderID, data){
+    try {
+        var orderCheck = await OrderSchema.findOneAndUpdate({
+            order_id: OrderID
+        }, {
+            $set:{
+                order_status: data.order_status,
+                order_total_price: data.order_total_price
+            }
+        },
+        { new: true }
+        )
+        if(orderCheck){
+            return{
+                status: "200",
+                Message: "Order Updated successfully",
+                data: {orderCheck}
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function DeleteOrder(data){
+    try {
+        var orderCheck = await OrderSchema.findOneAndDelete({
+            order_id: data.order_id
+        })
+        if(orderCheck){
+            return{
+                status: 200,
+                message: "Order Deleted Successfully",
+                data: {orderCheck}
+            }
+        }
+        else{
+            return{
+                status: 200,
+                message: "No Order Found",
+                data: {orderCheck}
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function GetOrder(data){
+    try {
+        var orderCheck = await OrderSchema.findOne({
+            order_id: data
+        })
+        if(orderCheck){
+            return{
+                status: 200,
+                message: "Order Fetched Successfully",
+                data: {orderCheck}
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+async function GetAllOrder(data){
+    try {
+        var orderCheck = await OrderSchema.find()
+        if(orderCheck){
+            return{
+                status: 200,
+                message: "All Orders Fetched Successfully",
+                data: {orderCheck}
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        throw error
+    }
+}
+
+module.exports = { createOrder, UpdateOrder, DeleteOrder, GetOrder, GetAllOrder }
