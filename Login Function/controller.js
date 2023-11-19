@@ -21,7 +21,7 @@ async function userLogin(data){
         }
 
         let genToken = CommonFunc.generateToken({id: matchUser._id});
-        await UserSchema.updateOne({_id: ObjectID(matchUser._id)}, {
+        await UserSchema.updateOne({_id: matchUser._id}, {
             $set: {
                 acc_token: genToken
             }
