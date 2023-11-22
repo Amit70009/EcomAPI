@@ -4,7 +4,6 @@ var mongoose = require("mongoose");
 var productSchema = new mongoose.Schema({
     product_code: { type: Number, required: true },
     product_name: { type: String, require: true },
-    product_quantity: {type: Number, require: true},
     product_category: {type: String},
     product_price: { type: Number, require: true },
     product_sale_price: {type: Number},

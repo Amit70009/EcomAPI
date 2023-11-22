@@ -34,8 +34,7 @@ async function userLogin(data){
                 full_name: matchUser.full_name,
                 email: matchUser.email,
                 role: matchUser.role,
-                acc_token: genToken,
-                senderid: matchUser.senderid
+                acc_token: genToken
             }
         }
     }
