@@ -18,6 +18,7 @@ async function AddCategory(data){
             category_id: data.category_id,
     category_name: data.category_name,
     category_subcategory: data.category_subcategory,
+    isCategoryEnable: data.isCategoryEnable
         }
 
         await CategorySchema.create(categoryCreate);
@@ -116,7 +117,8 @@ async function UpdateCategory(CategoryID, data){
         }, {
             $set:{
                 category_name: data.category_name,
-                category_subcategory: data.category_subcategory
+                category_subcategory: data.category_subcategory,
+                isCategoryEnable: data.isCategoryEnable
             }
         },
         {new: true})

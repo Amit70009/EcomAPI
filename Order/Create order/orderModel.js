@@ -6,6 +6,7 @@ var OrderSchema = new mongoose.Schema({
     order_status: {type: String},
     order_total_price: {type: Number},
     order_user_id: {type: String},
+    order_return_id: {type: String},
     order_returned_on: {type: Date},
     createdOn: {type: Date, default: new Date()},
 });
