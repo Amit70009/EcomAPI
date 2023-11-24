@@ -21,7 +21,8 @@ try {
         discount_type: data.discount_type,
         discount_type_amount: data.discount_type_amount,
         discount_start_date: data.discount_start_date,
-        discount_end_date: data.discount_end_date
+        discount_end_date: data.discount_end_date,
+        discount_applied_on: data.discount_applied_on
     }
 
     await discountSchema.create(addDiscount);
@@ -49,7 +50,8 @@ try {
             discount_type: data.discount_type,
             discount_type_amount: data.discount_type_amount,
             discount_start_date: data.discount_start_date,
-            discount_end_date: data.discount_end_date
+            discount_end_date: data.discount_end_date,
+            discount_applied_on: data.discount_applied_on
         }
     })
     if(matchDiscount){
