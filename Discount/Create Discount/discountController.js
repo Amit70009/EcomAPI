@@ -16,6 +16,7 @@ try {
 
     var addDiscount = {
         discount_code: data.discount_code,
+        discount_name: data.discount_name,
         discount_description: data.discount_description,
         isDiscountEnabled: data.isDiscountEnabled,
         discount_type: data.discount_type,
@@ -45,6 +46,7 @@ try {
         discount_code: discountID
     }, {
         $set:{
+            discount_name: data.discount_name,
             discount_description: data.discount_description,
             isDiscountEnabled: data.isDiscountEnabled,
             discount_type: data.discount_type,
