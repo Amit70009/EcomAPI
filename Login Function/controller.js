@@ -65,6 +65,21 @@ try {
 }
 }
 
+async function fetchAllProfile(data){
+    try {
+        var matchUser = await UserSchema.find();
+        if(matchUser){
+            return{
+                status: 200,
+                message: "All Profile fetched Successfully",
+                data: {matchUser}
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    }
+
 async function UpdateProfile(data){
     try {
         var UpdateProf = await UserSchema.updateOne({
@@ -95,4 +110,4 @@ console.log(UpdateProf);
     }
 
 }
-module.exports = { userLogin, fetchProfile, UpdateProfile }
+module.exports = { userLogin, fetchProfile, UpdateProfile, fetchAllProfile }

@@ -43,6 +43,7 @@ var DeletePromotion = require("./Promotion/Delete Promotion/deletePromotion");
 var UpdatePromotion = require("./Promotion/Update Promotion/editPromotion");
 var GetPromotion = require("./Promotion/Get Promotion/getPromotion");
 var GetAllPromotion = require("./Promotion/Get All Promotion/getAllPromotion");
+var FetchAllProfile = require("./Get Profile/getAllProfile");
 
 app.use(express.json());
 // app.use("/public", express.static(path.join(__dirname, "public")));
@@ -86,6 +87,7 @@ app.use("/api/users", UpdatePromotion)
 app.use("/api/users", GetPromotion)
 app.use("/api/users", GetAllPromotion)
 app.use("/api/users", DeletePromotion)
+app.use("/api/users", FetchAllProfile)
 
 app.listen(Constant.portNo, async (error, conn) => {
     if(error){

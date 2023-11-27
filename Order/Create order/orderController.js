@@ -16,10 +16,19 @@ async function createOrder(data){
         }
          
         var orderCreate = {
+            order_number: data.order_number,
             order_id: data.order_id,
+            order_ipAddress: data.order_ipAddress,
             order_status: data.order_status,
+            order_subtotal: data.order_subtotal,
             order_total_price: data.order_total_price,
-            order_user_id: data.order.order_user_id,
+            order_discount: data.order_discount,
+            order_item: data.order_item,
+            order_billing_info: data.order_billing_info,
+            order_shipping_info: data.order_shipping_info,
+            order_user_id: data.order_user_id,
+            order_notes: data.order_notes,
+            order_return_id: data.order_return_id,
             order_returned_on: data.order_returned_on,
         }
 
@@ -43,7 +52,13 @@ async function UpdateOrder(OrderID, data){
         }, {
             $set:{
                 order_status: data.order_status,
-                order_total_price: data.order_total_price
+                order_subtotal: data.order_subtotal,
+                order_total_price: data.order_total_price,
+                order_discount: data.order_discount,
+                order_item: data.order_item,
+                order_billing_info: data.order_billing_info,
+                order_shipping_info: data.order_shipping_info,
+                order_notes: data.order_notes,
             }
         },
         { new: true }
