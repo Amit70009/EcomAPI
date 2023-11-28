@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
     profileImage: {type: String},
     gender: {type: String},
     createdOn: {type: Date, default: new Date()},
-    billing_address: {
+    billing_address: [{
         address1: {type: String, required: true},
         address2: {type: String},
         address3: {type: String},
@@ -20,8 +20,8 @@ var userSchema = new mongoose.Schema({
         state: {type: String, required: true},
         postal_code: {type: String, required: true},
         country_code: {type: String, MinKey: 2, MaxKey: 3}, 
-    },
-    shipping_address: {
+    }],
+    shipping_address: [{
         address1: {type: String, required: true},
         address2: {type: String},
         address3: {type: String},
@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
         postal_code: {type: String, required: true},
         country_code: {type: String, MinKey: 2, MaxKey: 3},
         address_type: {type: String}    
-    },
+    }],
 });
 var usermodel = mongoose.model("users", userSchema);
 
