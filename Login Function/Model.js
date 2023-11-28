@@ -24,7 +24,7 @@ var userSchema = new mongoose.Schema({
     full_name: { type: String, required: true },
     email: { type: String, require: true },
     mobile: { type: Number, MaxKey: 10, require: true},
-    password: { type: String, require: true },
+    password: { type: String },
     role: {type:String, default:"Shopper"},
     acc_token: {type: String},
     isUserActive: { type: Boolean },

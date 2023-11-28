@@ -24,8 +24,7 @@ var OrderSchema = new mongoose.Schema({
             city: {type: String, required: true},
             state: {type: String, required: true},
             postal_code: {type: String, required: true},
-            country_code: {type: String, MinKey: 2, MaxKey: 3},
-            address_type: {type: String}    
+            country_code: {type: String, MinKey: 2, MaxKey: 3}, 
         },
         isBillingAndShippingSame: {type: Boolean},
         card_details: {
@@ -36,6 +35,7 @@ var OrderSchema = new mongoose.Schema({
             expireMonth: {type: Number},
             expireYear: {type: Number}
         },
+        payment_status: {type: String},
         billining_created_on: {type: Date, default: new Date()}
     },
     order_shipping_info: {
