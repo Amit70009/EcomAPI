@@ -15,6 +15,7 @@ var userSchema = new mongoose.Schema({
     billing_address: {
         address1: {type: String, required: true},
         address2: {type: String},
+        address3: {type: String},
         city: {type: String, required: true},
         state: {type: String, required: true},
         postal_code: {type: String, required: true},
@@ -23,6 +24,7 @@ var userSchema = new mongoose.Schema({
     shipping_address: {
         address1: {type: String, required: true},
         address2: {type: String},
+        address3: {type: String},
         city: {type: String, required: true},
         state: {type: String, required: true},
         postal_code: {type: String, required: true},
