@@ -1,25 +1,6 @@
 const { MaxKey } = require("mongodb");
 var mongoose = require("mongoose");
 
-var billingAddressSchema = new mongoose.Schema({
-    street1: { type: String, required: true},
-    street2: { type: String},
-    street3: { type: String},
-    city: { type: String },
-    state: {type: String},
-    postalcode: {type: String}
-});
-
-var shippingAddressSchema = new mongoose.Schema({
-    street1: { type: String, required: true},
-    street2: { type: String},
-    street3: { type: String},
-    city: { type: String },
-    state: {type: String},
-    postalcode: {type: String}
-});
-
-
 var userSchema = new mongoose.Schema({
     full_name: { type: String, required: true },
     email: { type: String, require: true },
@@ -31,8 +12,23 @@ var userSchema = new mongoose.Schema({
     profileImage: {type: String},
     gender: {type: String},
     createdOn: {type: Date, default: new Date()},
-    billing_address: [billingAddressSchema],
-    shipping_address: [shippingAddressSchema]
+    billing_address: {
+        address1: {type: String, required: true},
+        address2: {type: String},
+        city: {type: String, required: true},
+        state: {type: String, required: true},
+        postal_code: {type: String, required: true},
+        country_code: {type: String, MinKey: 2, MaxKey: 3}, 
+    },
+    shipping_address: {
+        address1: {type: String, required: true},
+        address2: {type: String},
+        city: {type: String, required: true},
+        state: {type: String, required: true},
+        postal_code: {type: String, required: true},
+        country_code: {type: String, MinKey: 2, MaxKey: 3},
+        address_type: {type: String}    
+    },
 });
 var usermodel = mongoose.model("users", userSchema);
 
