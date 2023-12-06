@@ -44,6 +44,11 @@ var UpdatePromotion = require("./Promotion/Update Promotion/editPromotion");
 var GetPromotion = require("./Promotion/Get Promotion/getPromotion");
 var GetAllPromotion = require("./Promotion/Get All Promotion/getAllPromotion");
 var FetchAllProfile = require("./Get Profile/getAllProfile");
+var AddShipping = require("./Shipping/Add Shipping/AddShipping");
+var DeleteShipping = require("./Shipping/Remove Shipping/RemoveShipping");
+var GetShipping = require("./Shipping/Get Shipping/GetShipping");
+var GetAllShipping = require("./Shipping/Get All Shipping/GetAllShipping");
+var UpdateShipping = require("./Shipping/Update Shipping/UpdateShipping")
 
 app.use(express.json());
 // app.use("/public", express.static(path.join(__dirname, "public")));
@@ -88,6 +93,11 @@ app.use("/api/users", GetPromotion)
 app.use("/api/users", GetAllPromotion)
 app.use("/api/users", DeletePromotion)
 app.use("/api/users", FetchAllProfile)
+app.use("/api/users", AddShipping)
+app.use("/api/users", GetShipping)
+app.use("/api/users", GetAllShipping)
+app.use("/api/users", UpdateShipping)
+app.use("/api/users", DeleteShipping)
 
 app.listen(Constant.portNo, async (error, conn) => {
     if(error){

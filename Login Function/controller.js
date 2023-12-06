@@ -1,7 +1,10 @@
 const { ObjectID } = require("bson");
 var UserSchema = require("../Login Function/Model").usermodel;
 var CommonFunc = require("../Common Function/commonfunction");
+const multer = require('multer');
 
+const storage = multer.memoryStorage(); // Store the file in memory
+const upload = multer({ storage: storage });
 
 /* For Login */
 async function userLogin(data){
@@ -80,25 +83,30 @@ async function fetchAllProfile(data){
     }
     }
 
-async function UpdateProfile(data){
+async function UpdateProfile(userID, data){
     try {
-        var UpdateProf = await UserSchema.updateOne({
-            email: data.email
+        var UpdateProf = await UserSchema.findOneAndUpdate({
+            email: userID
         }, {
             $set: {
-                first_name: data.first_name,
-                last_name: data.last_name,
-                profile_pic: data.profile_pic,
+                full_name: data.full_name,
                 gender: data.gender,
-                course: data.course,
-                profileImage: data.file,
-                company_name: data.company_name
+                billing_address: data.billing_address,
+                shipping_address: data.shipping_address,
+                password: data.password,
+                role: data.role,
+                mobile: data.mobile,
+                isUserActive: data.isUserActive,
             }
+        }, {
+            new: true
         })
-console.log(UpdateProf);
+
         if(UpdateProf){
             return{
-                status: 200
+                status: 200,
+                message: "User Updated successfully",
+                data: { UpdateProf }
             }
         }
     } catch (error) {
