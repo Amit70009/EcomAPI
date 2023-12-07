@@ -65,8 +65,6 @@ app.get("/", (request, response) => {
 
 const validApiKeys = [process.env.API_KEY];
 
-console.log(process.env.API_KEY);
-
 const authenticateApiKey = (req, res, next) => {
   const apiKey = req.headers['api-key'];
 
