@@ -9,7 +9,8 @@ var userSchema = new mongoose.Schema({
     role: {type:String, default:"Shopper"},
     acc_token: {type: String},
     isUserActive: { type: Boolean },
-    profileImage: {type: String},
+    profileImage: {data: Buffer,
+        contentType: String,},
     gender: {type: String},
     createdOn: {type: Date, default: new Date()},
     billing_address: [{

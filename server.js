@@ -1,6 +1,7 @@
 var express = require('express');
 var Constant = require("./Common Function/commonfunction");
 var app = express();
+const bodyParser = require('body-parser');
 var cors = require('cors');
 var dbconn = require("./Database/database");
 app.use(cors({
@@ -48,16 +49,36 @@ var AddShipping = require("./Shipping/Add Shipping/AddShipping");
 var DeleteShipping = require("./Shipping/Remove Shipping/RemoveShipping");
 var GetShipping = require("./Shipping/Get Shipping/GetShipping");
 var GetAllShipping = require("./Shipping/Get All Shipping/GetAllShipping");
-var UpdateShipping = require("./Shipping/Update Shipping/UpdateShipping")
-
+var UpdateShipping = require("./Shipping/Update Shipping/UpdateShipping");
+var UpdateProfilePic = require("./Update Profile/UpdateProfilePic");
+require('dotenv').config();
 app.use(express.json());
 // app.use("/public", express.static(path.join(__dirname, "public")));
 dbconn.databaseConn();
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.json())
+app.use('/uploads', express.static('uploads'))
 
 app.get("/", (request, response) => {
     response.sendFile(__dirname); 
 });
 
+const validApiKeys = [process.env.API_KEY];
+
+const authenticateApiKey = (req, res, next) => {
+  const apiKey = req.headers['api-key'];
+
+  if (!apiKey || !validApiKeys.includes(apiKey)) {
+    return res.status(401).json({ 
+        status: 401,
+        error: 'Unauthorized',
+    message: "You are not authorized to perform this action. Please check with your admin" });
+  }
+
+  next(); // Continue to the next middleware or route
+};
+
+app.use(authenticateApiKey);
 app.use("/api/users", UserLogin);
 app.use("/api/users", RegisterUser);
 app.use("/api/users", GetProfile);
@@ -98,6 +119,7 @@ app.use("/api/users", GetShipping)
 app.use("/api/users", GetAllShipping)
 app.use("/api/users", UpdateShipping)
 app.use("/api/users", DeleteShipping)
+app.use("/api/users", UpdateProfilePic)
 
 app.listen(Constant.portNo, async (error, conn) => {
     if(error){

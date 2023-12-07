@@ -1,10 +1,7 @@
 const { ObjectID } = require("bson");
 var UserSchema = require("../Login Function/Model").usermodel;
 var CommonFunc = require("../Common Function/commonfunction");
-const multer = require('multer');
 
-const storage = multer.memoryStorage(); // Store the file in memory
-const upload = multer({ storage: storage });
 
 /* For Login */
 async function userLogin(data){
@@ -55,7 +52,7 @@ async function userLogin(data){
 async function fetchProfile(data){
 try {
     var matchUser = await UserSchema.findOne({
-    email: data.email });
+    email: data });
     if(matchUser){
         return{
             status: 200,
@@ -85,23 +82,22 @@ async function fetchAllProfile(data){
 
 async function UpdateProfile(userID, data){
     try {
-        var UpdateProf = await UserSchema.findOneAndUpdate({
-            email: userID
-        }, {
-            $set: {
-                full_name: data.full_name,
-                gender: data.gender,
-                billing_address: data.billing_address,
-                shipping_address: data.shipping_address,
-                password: data.password,
-                role: data.role,
-                mobile: data.mobile,
-                isUserActive: data.isUserActive,
-            }
-        }, {
-            new: true
-        })
+        var updateFields = {
+            full_name: data.full_name,
+            gender: data.gender,
+            billing_address: data.billing_address,
+            shipping_address: data.shipping_address,
+            password: data.password,
+            role: data.role,
+            mobile: data.mobile,
+            isUserActive: data.isUserActive,
+        };
 
+        var UpdateProf = await UserSchema.findOneAndUpdate(
+            { email: userID },
+            { $set: updateFields },
+            { new: true }
+        );
         if(UpdateProf){
             return{
                 status: 200,
@@ -118,4 +114,32 @@ async function UpdateProfile(userID, data){
     }
 
 }
-module.exports = { userLogin, fetchProfile, UpdateProfile, fetchAllProfile }
+
+async function UpdateProfilePic(userID, data, allParams){
+    try {
+        
+        const filename = allParams;
+        console.log("FileName",filename);
+
+        var UpdateProf = await UserSchema.findOneAndUpdate(
+            { email: "amit.varshney@kibocommerce.com" },
+            { $set: {profileImage: filename} },
+            { new: true }
+        );
+        if(UpdateProf){
+            return{
+                status: 200,
+                message: "User Profile Updated successfully",
+                data: { UpdateProf }
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            status: 500, 
+            message: "Internal Server Error"
+        };
+    }
+
+}
+module.exports = { userLogin, fetchProfile, UpdateProfile, fetchAllProfile, UpdateProfilePic }
