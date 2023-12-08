@@ -52,11 +52,12 @@ var GetAllShipping = require("./Shipping/Get All Shipping/GetAllShipping");
 var UpdateShipping = require("./Shipping/Update Shipping/UpdateShipping");
 var UpdateProfilePic = require("./Update Profile/UpdateProfilePic");
 require('dotenv').config();
-app.use(express.json());
+
 // app.use("/public", express.static(path.join(__dirname, "public")));
 dbconn.databaseConn();
-app.use(bodyParser.urlencoded({ extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false}))
+app.use(bodyParser.json({limit: "50mb"}))
+app.use(express.json());
 app.use('/uploads', express.static('uploads'))
 
 app.get("/", (request, response) => {
