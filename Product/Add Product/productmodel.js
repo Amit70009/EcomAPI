@@ -19,7 +19,7 @@ var productSchema = new mongoose.Schema({
     product_short_description: {type: String},
     product_long_description: {type: String},
     isProductAvailable: { type: Boolean },
-    product_image: [{type: String}],
+    productImage: [{type: String}],
     createdOn: {type: Date, default: new Date()},
     isProductTaxable: {type: Boolean}
 });

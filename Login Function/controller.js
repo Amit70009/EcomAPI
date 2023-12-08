@@ -119,10 +119,9 @@ async function UpdateProfilePic(userID, data, allParams){
     try {
         
         const filename = allParams;
-        console.log("FileName",filename);
 
         var UpdateProf = await UserSchema.findOneAndUpdate(
-            { email: "amit.varshney@kibocommerce.com" },
+            { email: userID },
             { $set: {profileImage: filename} },
             { new: true }
         );

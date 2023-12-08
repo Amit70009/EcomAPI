@@ -1,8 +1,9 @@
 var ProductSchema = require("./productmodel").productModel;
 var CommonFunc = require("../../Common Function/commonfunction");
 
-async function AddProduct(data) {
+async function AddProduct(data, productImage) {
   try {
+    
     var checkProduct = await ProductSchema.find(
       {
         $or: [
@@ -19,6 +20,7 @@ async function AddProduct(data) {
         data: { checkProduct },
       };
     }
+  
     var AddProduct = {
       product_code: data.product_code,
       product_name: data.product_name,
@@ -32,7 +34,7 @@ async function AddProduct(data) {
       product_short_description: data.product_short_description,
       product_long_description: data.product_long_description,
       isProductAvailable: data.isProductAvailable,
-      product_image: data.product_image,
+      productImage: productImage,
       isProductTaxable: data.isProductTaxable,
     };
 

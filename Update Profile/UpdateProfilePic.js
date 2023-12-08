@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 const multer  = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/')
+      cb(null, 'profileImageUpload/')
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -26,7 +26,6 @@ userRouter.put("/update-profile-pic/:id", upload.single('profileImage'), async (
         message: updateUser.message,
         data: updateUser.data
     })
-   console.log("All Params", allParams);
 })
 
 module.exports = userRouter
