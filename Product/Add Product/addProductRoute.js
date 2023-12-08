@@ -21,7 +21,7 @@ userRouter.post("/add-product", upload.array("productImage"), async (req, res) =
     const allParams = req.body;
     const productImage = []
     for (let i = 0; i < req.files.length; i++) {
-      const productImages = req.files[i].path;
+      const productImages = req.files[i].name;
       productImage.push(productImages);
     }
 
