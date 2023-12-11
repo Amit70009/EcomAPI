@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 const multer  = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'productImageUpload/')
+      cb(null, '/tmp/productImageUpload/')
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)

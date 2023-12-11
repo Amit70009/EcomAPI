@@ -1,8 +1,6 @@
 var express = require('express');
 var Constant = require("./Common Function/commonfunction");
 var app = express();
-// const AWS = require("aws-sdk");
-// const s3 = new AWS.S3()
 const bodyParser = require('body-parser');
 var cors = require('cors');
 var dbconn = require("./Database/database");
@@ -61,84 +59,6 @@ app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 app.use(express.json());
 app.use('/uploads', express.static('uploads'))
-
-
-// app.get('*', async (req,res) => {
-//     let filename = req.path.slice(1)
-  
-//     try {
-//       let s3File = await s3.getObject({
-//         Bucket: process.env.BUCKET,
-//         Key: filename,
-//       }).promise()
-  
-//       res.set('Content-type', s3File.ContentType)
-//       res.send(s3File.Body.toString()).end()
-//     } catch (error) {
-//       if (error.code === 'NoSuchKey') {
-//         console.log(`No such key ${filename}`)
-//         res.sendStatus(404).end()
-//       } else {
-//         console.log(error)
-//         res.sendStatus(500).end()
-//       }
-//     }
-//   })
-
-//   app.put('*', async (req, res) => {
-//     let filename = req.path.slice(1);
-  
-//     console.log(typeof req.body);
-  
-//     try {
-//       // Ensure that process.env.BUCKET is defined and not empty
-//       if (!process.env.BUCKET) {
-//         throw new Error('Bucket name is not defined in the environment variables.');
-//       }
-  
-//       await s3.putObject({
-//         Body: JSON.stringify(req.body),
-//         Bucket: process.env.BUCKET,
-//         Key: filename,
-//       }).promise();
-  
-//       res.set('Content-type', 'text/plain');
-//       res.send('ok').end();
-//     } catch (error) {
-//       console.error('Error in PUT route:', error);
-//       res.sendStatus(500).end();
-//     }
-//   });
-  
-//   app.delete('*', async (req, res) => {
-//     let filename = req.path.slice(1);
-  
-//     try {
-//       // Ensure that process.env.BUCKET is defined and not empty
-//       if (!process.env.BUCKET) {
-//         throw new Error('Bucket name is not defined in the environment variables.');
-//       }
-  
-//       await s3.deleteObject({
-//         Bucket: process.env.BUCKET,
-//         Key: filename,
-//       }).promise();
-  
-//       res.set('Content-type', 'text/plain');
-//       res.send('ok').end();
-//     } catch (error) {
-//       console.error('Error in DELETE route:', error);
-//       res.sendStatus(500).end();
-//     }
-//   });
-  
-
-//   app.use('*', (req, res) => {
-//     console.log(`Unhandled route: ${req.path}`);
-//     res.sendStatus(404).end();
-//   });
-
- 
 
 app.get("/", (request, response) => {
     response.sendFile(__dirname); 
