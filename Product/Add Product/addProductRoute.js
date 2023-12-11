@@ -5,9 +5,14 @@ var productController = require("../Add Product/productController");
 var mongoose = require("mongoose");
 const multer  = require('multer')
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '/tmp/productImageUpload/')
-    },
+  destination: function (req, file, cb) {
+      const dest = '/tmp/productImageUpload/';
+      
+      // Create the destination directory if it doesn't exist
+      fs.mkdirSync(dest, { recursive: true });
+
+      cb(null, dest);
+  },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
       const fileFormat = path.extname(file.originalname).toLowerCase();
