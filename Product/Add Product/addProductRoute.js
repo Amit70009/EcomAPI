@@ -1,4 +1,5 @@
 var express = require("express");
+const fs = require("fs");
 var userRouter = express.Router();
 const path = require("path");
 var productController = require("../Add Product/productController");
