@@ -25,6 +25,8 @@ userRouter.post("/add-product", upload.array("productImage"), async (req, res) =
       productImage.push(productImages);
     }
 
+    
+
   
     var addProduct = await productController.AddProduct(allParams, productImage);
     res.send({

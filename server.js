@@ -1,6 +1,8 @@
 var express = require('express');
 var Constant = require("./Common Function/commonfunction");
 var app = express();
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3()
 const bodyParser = require('body-parser');
 var cors = require('cors');
 var dbconn = require("./Database/database");
@@ -55,8 +57,8 @@ require('dotenv').config();
 
 // app.use("/public", express.static(path.join(__dirname, "public")));
 dbconn.databaseConn();
-app.use(bodyParser.urlencoded({ limit: "500mb", extended: false}))
-app.use(bodyParser.json({limit: "500mb"}))
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.json())
 app.use(express.json());
 app.use('/uploads', express.static('uploads'))
 
@@ -78,6 +80,60 @@ const authenticateApiKey = (req, res, next) => {
 
   next(); // Continue to the next middleware or route
 };
+
+app.get('*', async (req,res) => {
+    let filename = req.path.slice(1)
+  
+    try {
+      let s3File = await s3.getObject({
+        Bucket: process.env.BUCKET,
+        Key: filename,
+      }).promise()
+  
+      res.set('Content-type', s3File.ContentType)
+      res.send(s3File.Body.toString()).end()
+    } catch (error) {
+      if (error.code === 'NoSuchKey') {
+        console.log(`No such key ${filename}`)
+        res.sendStatus(404).end()
+      } else {
+        console.log(error)
+        res.sendStatus(500).end()
+      }
+    }
+  })
+
+  app.put('*', async (req,res) => {
+    let filename = req.path.slice(1)
+  
+    console.log(typeof req.body)
+  
+    await s3.putObject({
+      Body: JSON.stringify(req.body),
+      Bucket: process.env.BUCKET,
+      Key: filename,
+    }).promise()
+  
+    res.set('Content-type', 'text/plain')
+    res.send('ok').end()
+  })
+
+  app.delete('*', async (req,res) => {
+    let filename = req.path.slice(1)
+  
+    await s3.deleteObject({
+      Bucket: process.env.BUCKET,
+      Key: filename,
+    }).promise()
+  
+    res.set('Content-type', 'text/plain')
+    res.send('ok').end()
+  })
+
+  app.use('*', (req,res) => {
+    res.sendStatus(404).end()
+  })
+  
 
 app.use(authenticateApiKey);
 app.use("/api/users", UserLogin);
