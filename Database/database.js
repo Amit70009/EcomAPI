@@ -1,4 +1,4 @@
-var Constant = require("../Common Function/commonfunction");
+var Constant = require("../Common Function/commonfunction.js");
 var mongoose = require("mongoose");
 
 function databaseConn(){

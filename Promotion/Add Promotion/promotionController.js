@@ -1,6 +1,6 @@
 var promotionSchema = require("./promotionmodel").promotionModel
 const { model } = require("mongoose");
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function AddPromotion(data){
     try {

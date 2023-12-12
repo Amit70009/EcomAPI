@@ -1,9 +1,10 @@
 var express = require('express');
-var Constant = require("./Common Function/commonfunction");
+var Constant = require("./Common Function/commonfunction.js");
 var app = express();
+
 const bodyParser = require('body-parser');
 var cors = require('cors');
-var dbconn = require("./Database/database");
+var dbconn = require("./Database/database.js");
 app.use(cors({
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, GET, PUT, DELETE",

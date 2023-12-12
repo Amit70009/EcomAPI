@@ -1,6 +1,6 @@
 const { ObjectID } = require("bson");
 var ShippingOrderSchema = require("../Add Shipping/ShippingModel").ShippingOrderModal;
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function createShipping(data){
     try {

@@ -1,6 +1,6 @@
 const { ObjectID } = require("bson");
 var ReturnOrderSchema = require("../Create Return Order/returnOrderModels").ReturnOrderModel;
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function createReturnOrder(data){
     try {

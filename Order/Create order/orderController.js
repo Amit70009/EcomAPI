@@ -1,6 +1,6 @@
 const { ObjectID, UUID } = require("bson");
 var OrderSchema = require("../Create order/orderModel").OrderModel;
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function createOrder(data){
     try {

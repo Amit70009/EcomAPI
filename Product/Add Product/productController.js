@@ -1,5 +1,7 @@
 var ProductSchema = require("./productmodel").productModel;
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
+var mongoose = require("mongoose");
+
 
 async function AddProduct(data, productImage) {
   try {
@@ -117,16 +119,29 @@ async function EditProduct(productID, data) {
   }
 }
 
+
 async function fetchProduct(data) {
   try {
+
     var matchProduct = await ProductSchema.findOne({
       product_code: data,
     });
+
+    if (!matchProduct) {
+      return {
+        status: '404',
+        message: 'Product not found',
+        data: null,
+      };
+    }
+
     if (matchProduct) {
       return {
         status: 200,
         message: "Product Fetched Successfully",
-        data: { matchProduct },
+        data: {
+          matchProduct
+        },
       };
     }
   } catch (error) {

@@ -1,6 +1,6 @@
 const { ObjectID } = require("bson");
 var UserSchema = require("../Login Function/Model").usermodel;
-var CommonFunc = require("../Common Function/commonfunction");
+var CommonFunc = require("../Common Function/commonfunction.js");
 
 
 /* For Login */

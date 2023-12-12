@@ -1,5 +1,5 @@
 var CategorySchema = require("./categoryModel").CategoryModel
-var CommonFunc = require("../../Common Function/commonfunction");
+var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function AddCategory(data){
     try {

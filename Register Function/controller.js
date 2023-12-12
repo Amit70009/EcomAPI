@@ -1,7 +1,7 @@
 const { ObjectID, UUID } = require("bson");
 const express = require("express")
 var UserSchema = require("../Login Function/Model").usermodel;
-var CommonFunc = require("../Common Function/commonfunction");
+var CommonFunc = require("../Common Function/commonfunction.js");
 
 /* For Register */
 async function userRegister(data){
