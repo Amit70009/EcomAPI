@@ -1,10 +1,14 @@
 var CategorySchema = require("./categoryModel").CategoryModel
+var { CategoryModel } = require("./categoryModel.js")
 var CommonFunc = require("../../Common Function/commonfunction.js");
 
 async function AddCategory(data){
     try {
-        var checkCategory = await CategorySchema.findOne({
-            category_id: data.category_id
+        var checkCategory = await CategoryModel.findOne({
+            $or: [
+                { category_id: data.category_id },
+                { category_name: data.category_name }
+            ]
         })
         if(checkCategory){
             return{
@@ -14,21 +18,27 @@ async function AddCategory(data){
             }
         }
 
+        const highestPriorityCategory = await CategoryModel.findOne({}, { category_priority: 1 }).sort({ category_priority: -1 });
+        const newPriority = highestPriorityCategory ? highestPriorityCategory.category_priority + 1 : 0;
+        console.log("Highest",highestPriorityCategory);
+        console.log("New", newPriority);
+
         var categoryCreate = {
             category_id: data.category_id,
     category_name: data.category_name,
     category_subcategory: data.category_subcategory,
-    isCategoryEnable: data.isCategoryEnable
+    isCategoryEnable: data.isCategoryEnable,
+    category_priority: newPriority,
         }
 
-        await CategorySchema.create(categoryCreate);
-        {
+        await CategoryModel.create(categoryCreate);
+       
             return {
             status: 200,
             message: "Category Created Successfully",
             data: {categoryCreate}
         }
-        }
+       
     } catch (error) {
         console.log(error);
         throw error;

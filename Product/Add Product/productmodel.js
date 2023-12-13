@@ -5,8 +5,8 @@ var productSchema = new mongoose.Schema({
     product_code: { type: Number, required: true },
     product_name: { type: String, require: true },
     product_category: {type: String},
-    product_price: { type: Number, require: true },
-    product_sale_price: {type: Number},
+    product_price: { type: String, require: true },
+    product_sale_price: {type: String},
     product_size: [{type: Number}],
     product_color: [{type: String}],
     product_dimension: {
