@@ -104,9 +104,10 @@ async function GetShipping(data){
     }
 }
 
-async function GetAllShipping(data){
+async function GetAllShipping(data, queryParams){
     try {
-        var ShippingCheck = await ShippingOrderSchema.find()
+        const filter = { ...queryParams };
+        var ShippingCheck = await ShippingOrderSchema.find(filter)
         if(ShippingCheck){
             return{
                 status: 200,

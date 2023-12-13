@@ -150,9 +150,11 @@ async function fetchProduct(data) {
   }
 }
 
-async function fetchAllProduct() {
+async function fetchAllProduct(queryParams) {
+
   try {
-    var matchProduct = await ProductSchema.find();
+    const filter = { ...queryParams };
+    var matchProduct = await ProductSchema.find(filter);
     if (matchProduct) {
       return {
         status: 200,

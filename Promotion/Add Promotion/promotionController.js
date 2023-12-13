@@ -80,9 +80,10 @@ async function GetPromotion(data){
     }
 }
 
-async function GetAllPromotion(data){
+async function GetAllPromotion(data, queryParams){
     try {
-        var promotionCheck = await promotionSchema.find();
+        const filter = { ...queryParams };
+        var promotionCheck = await promotionSchema.find(filter);
         if(promotionCheck){
             return{
                 status: 200,

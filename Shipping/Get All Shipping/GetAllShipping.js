@@ -4,7 +4,7 @@ var ShippingController = require("../Add Shipping/ShippingController");
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-shipping", async (req, res) => {
-    var FetchAllShipping = await ShippingController.GetAllShipping();
+    var FetchAllShipping = await ShippingController.GetAllShipping(req.query);
     res.send({
         status: FetchAllShipping.status,
         message: FetchAllShipping.message,

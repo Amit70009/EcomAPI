@@ -4,7 +4,7 @@ var fetchDiscount = require("../Create Discount/discountController");
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-discount", async (req, res) => {
-    var FetchDiscount = await fetchDiscount.GetAllDiscount();
+    var FetchDiscount = await fetchDiscount.GetAllDiscount(req.query);
     res.send({
         status: FetchDiscount.status,
         message: FetchDiscount.message,

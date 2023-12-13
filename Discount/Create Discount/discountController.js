@@ -116,9 +116,10 @@ async function GetDiscount(data){
     }
 }
 
-async function GetAllDiscount(data){
+async function GetAllDiscount(data, queryParams){
     try {
-        var matchDiscount = await discountSchema.find();
+        const filter = { ...queryParams };
+        var matchDiscount = await discountSchema.find(filter);
         if(matchDiscount){
             return{
                 status: 200,

@@ -61,9 +61,10 @@ async function GetCategory(data){
     }
 }
 
-async function GetAllCategory(data){
+async function GetAllCategory(data, queryParams){
     try {
-        var checkCategory = await CategorySchema.find()
+        const filter = { ...queryParams };
+        var checkCategory = await CategorySchema.find(filter)
         if(checkCategory)
         {
             return{

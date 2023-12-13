@@ -119,9 +119,10 @@ async function GetOrder(data){
     }
 }
 
-async function GetAllOrder(data){
+async function GetAllOrder(data, queryParams){
     try {
-        var orderCheck = await OrderSchema.find()
+        const filter = { ...queryParams };
+        var orderCheck = await OrderSchema.find(filter)
         if(orderCheck){
             return{
                 status: 200,

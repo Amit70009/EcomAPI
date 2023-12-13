@@ -4,7 +4,7 @@ var ReturnOrderController = require("../Create Return Order/returnOrderControlle
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-return-orders", async (req, res) => {
-    var FetchReturnOrders = await ReturnOrderController.GetAllReturnOrder();
+    var FetchReturnOrders = await ReturnOrderController.GetAllReturnOrder(req.query);
     res.send({
         status: FetchReturnOrders.status,
         message: FetchReturnOrders.message,

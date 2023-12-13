@@ -4,7 +4,7 @@ var fetchProduct = require("../Add Product/productController");
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-product", async (req, res) => {
-    var FetchProduct = await fetchProduct.fetchAllProduct();
+    var FetchProduct = await fetchProduct.fetchAllProduct(req.query);
     res.send({
         status: FetchProduct.status,
         message: FetchProduct.message,

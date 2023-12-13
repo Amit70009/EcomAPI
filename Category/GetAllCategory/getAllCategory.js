@@ -4,7 +4,7 @@ var CategoryController = require("../Add Category/categoryController");
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-category", async (req, res) => {
-    var FetchCategory = await CategoryController.GetAllCategory();
+    var FetchCategory = await CategoryController.GetAllCategory(req.query);
     res.send({
         status: FetchCategory.status,
         message: FetchCategory.message,

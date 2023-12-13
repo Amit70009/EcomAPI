@@ -4,7 +4,7 @@ var fetchOrders = require("../Create order/orderController");
 var mongoose = require("mongoose");
 
 userRouter.get("/fetch-all-orders", async (req, res) => {
-    var FetchOrders = await fetchOrders.GetAllOrder();
+    var FetchOrders = await fetchOrders.GetAllOrder(req.query);
     res.send({
         status: FetchOrders.status,
         message: FetchOrders.message,

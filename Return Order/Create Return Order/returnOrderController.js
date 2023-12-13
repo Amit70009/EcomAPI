@@ -104,9 +104,10 @@ async function GetReturnOrder(data){
     }
 }
 
-async function GetAllReturnOrder(data){
+async function GetAllReturnOrder(data, queryParams){
     try {
-        var ReturnOrderCheck = await ReturnOrderSchema.find()
+        const filter = { ...queryParams };
+        var ReturnOrderCheck = await ReturnOrderSchema.find(filter)
         if(ReturnOrderCheck){
             return{
                 status: 200,
