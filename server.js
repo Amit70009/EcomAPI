@@ -52,7 +52,13 @@ var GetShipping = require("./Shipping/Get Shipping/GetShipping");
 var GetAllShipping = require("./Shipping/Get All Shipping/GetAllShipping");
 var UpdateShipping = require("./Shipping/Update Shipping/UpdateShipping");
 var UpdateProfilePic = require("./Update Profile/UpdateProfilePic");
+var AddToCart = require("./Cart/AddCart/addToCart.js")
+var UpdateCart = require("./Cart/UpdateCart/UpdateCart.js")
+var DeleteAllCart = require("./Cart/Delete cart/DeleteAll.js")
+var DeleteCart = require("./Cart/Delete cart/deleteCart.js")
+var fetchAllCart = require("./Cart/Get Cart/fetchCart.js")
 require('dotenv').config();
+
 
 // app.use("/public", express.static(path.join(__dirname, "public")));
 dbconn.databaseConn();
@@ -125,6 +131,11 @@ app.use("/api/users", GetAllShipping)
 app.use("/api/users", UpdateShipping)
 app.use("/api/users", DeleteShipping)
 app.use("/api/users", UpdateProfilePic)
+app.use("/api/users", AddToCart)
+app.use("/api/users", UpdateCart)
+app.use("/api/users", DeleteAllCart)
+app.use("/api/users", DeleteCart)
+app.use("/api/users", fetchAllCart)
 
 app.listen(Constant.portNo, async (error, conn) => {
     if(error){
