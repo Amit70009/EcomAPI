@@ -61,8 +61,6 @@ async function DeleteAllCart(userID, data ) {
     var deleteCart = await CartSchema.deleteMany({
       cart_user_id: userID,
     });
-    console.log(userID);
-    console.log(deleteCart);
     return {
       status: 200,
       message: "All Product has been Deleted Successfully From Cart",
@@ -77,7 +75,7 @@ async function DeleteAllCart(userID, data ) {
 async function DeleteCart(cartID, data) {
   try {
     var checkCart = await CartSchema.find({
-      cart_product_code: cartID,
+      _id: cartID,
     });
     if (!checkCart.length) {
       return {
@@ -87,7 +85,7 @@ async function DeleteCart(cartID, data) {
       };
     } else {
       var deleteCart = await CartSchema.deleteOne({
-       cart_product_code: cartID,
+       _id: cartID,
       });
       return {
         status: 200,
