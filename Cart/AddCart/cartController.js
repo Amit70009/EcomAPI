@@ -34,7 +34,7 @@ async function UpdateCart(cartID, data) {
   try {
     var matchCart = await CartSchema.findOneAndUpdate(
       {
-        cart_product_code: cartID,
+        _id: cartID,
       },
       {
         $set: {
@@ -118,11 +118,31 @@ async function fetchAllCart(userID, data, queryParams){
   }
 }
 
+async function fetchCart(userID, data, queryParams){
+  try {
+      const filter = { ...queryParams };
+      var matchCart = await CartSchema.findOne({
+        _id: userID,
+        });
+      if(matchCart){
+          return{
+              status: 200,
+              message: "Cart Fetched Successfully",
+              data: {matchCart}
+          }
+      }
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+}
+
 
 module.exports = {
   AddCart,
   DeleteAllCart,
   UpdateCart,
   DeleteCart,
-  fetchAllCart
+  fetchAllCart,
+  fetchCart
 };
