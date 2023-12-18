@@ -3,7 +3,7 @@ var userRouter = express.Router();
 var cartController = require("../AddCart/cartController");
 var mongoose = require("mongoose");
 
-userRouter.post("/delete-all-cart/:id", async (req, res) => {
+userRouter.delete("/delete-all-cart/:id", async (req, res) => {
     const userID = req.params.id;
     var DeleteCart = await cartController.DeleteAllCart(userID);
     res.send({
