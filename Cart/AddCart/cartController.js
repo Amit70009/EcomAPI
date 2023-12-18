@@ -123,7 +123,7 @@ async function fetchCart(userID, data, queryParams){
       const filter = { ...queryParams };
       var matchCart = await CartSchema.findOne({
         _id: userID,
-        });
+      })
       if(matchCart){
           return{
               status: 200,
@@ -132,7 +132,26 @@ async function fetchCart(userID, data, queryParams){
           }
       }
   } catch (error) {
-      console.log(error);
+      // console.log(error);
+      throw error;
+  }
+}
+
+async function fetchCartByProductCode(userID, data, queryParams){
+  try {
+      const filter = { ...queryParams };
+      var matchCart = await CartSchema.findOne({
+        cart_product_code: userID,
+      })
+      if(matchCart){
+          return{
+              status: 200,
+              message: "Cart Fetched Successfully",
+              data: {matchCart}
+          }
+      }
+  } catch (error) {
+      // console.log(error);
       throw error;
   }
 }
@@ -144,5 +163,6 @@ module.exports = {
   UpdateCart,
   DeleteCart,
   fetchAllCart,
-  fetchCart
+  fetchCart,
+  fetchCartByProductCode
 };
