@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 
 fetchUser.get("/profile/:id", async (req, res) => {
     const allParams = req.params.id;
+    console.log(allParams);
     var callProfile = await fetchController.fetchProfile(allParams);
     res.send({
         status: callProfile.status,

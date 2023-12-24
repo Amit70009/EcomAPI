@@ -51,6 +51,7 @@ async function userLogin(data){
 
 async function fetchProfile(data){
 try {
+    console.log(data);
     var matchUser = await UserSchema.findOne({
     email: data });
     if(matchUser){

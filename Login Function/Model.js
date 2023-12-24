@@ -13,6 +13,10 @@ var userSchema = new mongoose.Schema({
         contentType: String,},
     gender: {type: String},
     createdOn: {type: Date, default: new Date()},
+    saved_cards: [{
+        cart_number: {type: String},
+        expiry: {type: String}
+    }],
     billing_address: [{
         address1: {type: String, required: true},
         address2: {type: String},
