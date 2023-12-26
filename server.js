@@ -58,7 +58,8 @@ var DeleteAllCart = require("./Cart/Delete cart/DeleteAll.js")
 var DeleteCart = require("./Cart/Delete cart/deleteCart.js")
 var fetchAllCart = require("./Cart/Get Cart/fetchCart.js");
 const fetchCart = require('./Cart/Get Cart/fetchOneCart.js');
-var fetchCartByProductCode = require("./Cart/Get Cart/fetchCartByProductCode.js")
+var fetchCartByProductCode = require("./Cart/Get Cart/fetchCartByProductCode.js");
+var Payment = require("./Payment/payment.js")
 require('dotenv').config();
 
 
@@ -140,6 +141,7 @@ app.use("/api/users", DeleteCart)
 app.use("/api/users", fetchAllCart)
 app.use("/api/users", fetchCart)
 app.use("/api/users", fetchCartByProductCode)
+app.use("/api/users", Payment);
 
 app.listen(Constant.portNo, async (error, conn) => {
     if(error){

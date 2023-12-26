@@ -19,6 +19,9 @@ async function createShipping(data){
             shipping_id: data.shipping_id,
             shipping_name: data.shipping_name,
             shipping_price: data.shipping_price,
+            shipping_minimum_value: data.shipping_minimum_value,
+            shipping_maximum_value: data.shipping_maximum_value,
+            shipping_unit: data.shipping_unit,
             isShippingEnable: data.isShippingEnable
         }
 
@@ -43,7 +46,10 @@ async function UpdateShipping(shipping_id, data){
             $set:{
                 shipping_name: data.shipping_name,
                 shipping_price: data.shipping_price,
-                isShippingEnable: data.isShippingEnable
+                isShippingEnable: data.isShippingEnable,
+                shipping_minimum_value: data.shipping_minimum_value,
+            shipping_maximum_value: data.shipping_maximum_value,
+            shipping_unit: data.shipping_unit,
             }
         },
         { new: true }
