@@ -9,8 +9,7 @@ var userSchema = new mongoose.Schema({
     role: {type:String, default:"Shopper"},
     acc_token: {type: String},
     isUserActive: { type: Boolean },
-    profileImage: {data: Buffer,
-        contentType: String,},
+    profileImage: {data: Buffer, contentType: String,},
     gender: {type: String},
     createdOn: {type: Date, default: new Date()},
     saved_cards: [{
@@ -18,6 +17,10 @@ var userSchema = new mongoose.Schema({
         expiry: {type: String}
     }],
     billing_address: [{
+        billing_first_name: {type: String},
+        billing_last_name: {type: String},
+        billing_email: {type: String},
+        billing_phone: {type: Number, MaxKey: 10},
         address1: {type: String, required: true},
         address2: {type: String},
         address3: {type: String},
@@ -27,6 +30,10 @@ var userSchema = new mongoose.Schema({
         country_code: {type: String, MinKey: 2, MaxKey: 3}, 
     }],
     shipping_address: [{
+        shipping_first_name: {type: String},
+        shipping_last_name: {type: String},
+        shipping_email: {type: String},
+        shipping_phone: {type: Number, MaxKey: 10},
         address1: {type: String, required: true},
         address2: {type: String},
         address3: {type: String},
