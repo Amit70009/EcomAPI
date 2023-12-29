@@ -3,9 +3,10 @@ var userRouter = express.Router();
 var cartController = require("../AddCart/cartController");
 var mongoose = require("mongoose");
 
-userRouter.get("/fetch-cart-by-product-code/:id", async (req, res) => {
-    const userID = req.params.id
-    var FetchCart = await cartController.fetchCartByProductCode(userID);
+userRouter.get("/fetch-cart-by-product-code/:userId/:productId", async (req, res) => {
+    const userID = req.params.userId
+    const ProductID = req.params.productId
+    var FetchCart = await cartController.fetchCartByProductCode(userID, ProductID);
     res.send({
         status: FetchCart.status,
         message: FetchCart.message,

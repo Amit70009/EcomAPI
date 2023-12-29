@@ -137,24 +137,33 @@ async function fetchCart(userID, data, queryParams){
   }
 }
 
-async function fetchCartByProductCode(userID, data, queryParams){
+async function fetchCartByProductCode(userID, ProductID, data, queryParams) {
   try {
-      const filter = { ...queryParams };
-      var matchCart = await CartSchema.findOne({
-        cart_product_code: userID,
-      })
-      if(matchCart){
-          return{
-              status: 200,
-              message: "Cart Fetched Successfully",
-              data: {matchCart}
-          }
-      }
+    // const filter = { ...queryParams };
+    var matchCart = await CartSchema.findOne({
+      cart_product_code: userID,
+      cart_user_id: ProductID,
+    });
+
+    if (matchCart) {
+      return {
+        status: 200,
+        message: "Cart Fetched Successfully",
+        data: { matchCart },
+      };
+    } else {
+      return {
+        status: 404,
+        message: "Cart not found",
+        data: null,
+      };
+    }
   } catch (error) {
-      // console.log(error);
-      throw error;
+    console.error(error);
+    throw error;
   }
 }
+
 
 
 module.exports = {
