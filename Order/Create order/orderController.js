@@ -17,7 +17,7 @@ async function createOrder(data){
          
         var orderCreate = {
             order_number: data.order_number,
-            order_id: new UUID(),
+            order_id: data.order_id,
             order_ipAddress: data.order_ipAddress,
             order_status: data.order_status,
             order_subtotal: data.order_subtotal,
