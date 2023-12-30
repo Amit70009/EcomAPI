@@ -6,50 +6,46 @@ userRouter.post("/create-checkout-session", async (req, res) => {
     const products = req.body.cart;
     const shipping = req.body.shipping;
     const discounts = req.body.discount; 
+    const orderTotal = req.body.totalPrice;
 
-    const lineItems = products.map((product) => ({
-        
+    const lineItems = [{
         price_data: {
             currency: "INR",
             product_data: {
-                name: product.cart_product_name,
-                images: product.cart_product_image
+                name: "Total Price",
             },
-            unit_amount: parseInt(product.cart_total_price) * 100,
+            unit_amount: orderTotal * 100
+        
         },
-        quantity: parseInt(product.cart_product_quantity),
-    }));
+        quantity: 1,
+    }
+    ]
 
-    const shippingItems = shipping.map((ship) => ({
-        shipping_rate_data:{
-            type: 'fixed_amount',
-            fixed_amount:{
-                amount: ship.shipping_price * 100,
-                currency: 'INR',
-            },
-            display_name: ship.shipping_name,
-            delivery_estimate: {
-                minimum: {
-                    unit: ship.shipping_unit,
-                    value: ship.shipping_minimum_value
-                },
-                maximum: {
-                    unit: ship.shipping_unit,
-                    value: ship.shipping_maximum_value
-                }
-            }
-        }
-    }))
+    // const shippingItems = shipping.map((ship) => ({
+    //     shipping_rate_data:{
+    //         type: 'fixed_amount',
+    //         fixed_amount:{
+    //             amount: ship.shipping_price * 100,
+    //             currency: 'INR',
+    //         },
+    //         display_name: ship.shipping_name,
+    //         delivery_estimate: {
+    //             minimum: {
+    //                 unit: ship.shipping_unit,
+    //                 value: ship.shipping_minimum_value
+    //             },
+    //             maximum: {
+    //                 unit: ship.shipping_unit,
+    //                 value: ship.shipping_maximum_value
+    //             }
+    //         }
+    //     }
+    // }))
 
-   const couponCodes = discounts.map((discount) => {
-    code: discount.discount_code});
-    console.log(discounts);
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        shipping_options: shippingItems,
         line_items: lineItems,
-        // allow_promotion_codes: true,
         mode: "payment",
         success_url: "http://localhost:3000/success",
         cancel_url: "http://localhost:3000/cancel"

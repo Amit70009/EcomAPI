@@ -72,6 +72,7 @@ var OrderSchema = new mongoose.Schema({
         product_price: {type: Number},
         product_color: {type: String},
         product_size: {type: String},
+        product_total_price: {type: String},
     }],
     order_notes: {type: String},
     order_return_id: {type: String},
