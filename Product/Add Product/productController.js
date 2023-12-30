@@ -53,10 +53,10 @@ async function AddProduct(data, productImage) {
   }
 }
 
-async function DeleteProduct(data) {
+async function DeleteProduct(allParams, data) {
   try {
     var checkProduct = await ProductSchema.find({
-      product_code: data.product_code,
+      product_code: allParams,
     });
     if (!checkProduct.length) {
       return {
@@ -66,7 +66,7 @@ async function DeleteProduct(data) {
       };
     } else {
       var deleteProduct = await ProductSchema.deleteOne({
-        product_code: data.product_code,
+        product_code: allParams,
       });
       return {
         status: 200,

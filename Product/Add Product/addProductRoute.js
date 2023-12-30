@@ -19,10 +19,9 @@ const s3 = new aws.S3({
   region: process.env.S3_BUCKET_REGION
 })
 
-
 const upload = multer({
   storage: multerS3({
-    bucket: "ecomm-bucket-amit", // Update with your bucket name
+    bucket: "ecomm-bucket-amit",
     s3,
     acl: "public-read",
     key: (req, file, cb) => {
@@ -42,23 +41,6 @@ const upload = multer({
 });
 
 var userRouter = express.Router();
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//       const dest = '/tmp/productImageUpload/';
-      
-//       // Create the destination directory if it doesn't exist
-//       fs.mkdirSync(dest, { recursive: true });
-
-//       cb(null, dest);
-//   },
-//     filename: function (req, file, cb) {
-//       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-//       const fileFormat = path.extname(file.originalname).toLowerCase();
-//       cb(null, file.fieldname + '-' + uniqueSuffix + fileFormat)
-//     }
-//   })
-
-//   const upload = multer({ storage: storage })
 
 userRouter.post("/add-product", upload.array("productImage"), async (req, res) => {
     const allParams = req.body;
