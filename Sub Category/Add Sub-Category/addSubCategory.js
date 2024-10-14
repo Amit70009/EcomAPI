@@ -1,6 +1,6 @@
 var express = require("express");
 var userRouter = express.Router();
-var CategoryController = require("../Add Category/categoryController");
+var SubCategoryController = require("./subCategoryController");
 var mongoose = require("mongoose");
 const fs = require("fs");
 const aws = require("aws-sdk")
@@ -40,14 +40,14 @@ const upload = multer({
   },
 });
 
-userRouter.post("/add-category", upload.single("category_image"), async (req, res) => {
+userRouter.post("/add-sub-category", upload.single("sub_category_image"), async (req, res) => {
     const allParams = req.body;
-    const categoryImage = req.file.location;
-    var addCategory = await CategoryController.AddCategory(allParams, categoryImage);
+    const SubCategoryImage = req.file.location;
+    var addSubCategory = await SubCategoryController.AddSubCategory(allParams, SubCategoryImage);
     res.send({
-        status: addCategory.status,
-        message: addCategory.message,
-        data: addCategory.data
+        status: addSubCategory.status,
+        message: addSubCategory.message,
+        data: addSubCategory.data
     })
 })
 

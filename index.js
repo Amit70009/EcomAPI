@@ -61,6 +61,11 @@ var PhonePe = require("./Payment/phonePay.js")
 var Payment = require("./Payment/payment.js")
 const fetchCart = require('./Cart/Get Cart/fetchOneCart.js');
 var fetchCartByProductCode = require("./Cart/Get Cart/fetchCartByProductCode.js");
+var CreateSubCategory = require("./Sub Category/Add Sub-Category/addSubCategory.js")
+var FetchSubCategory = require("./Sub Category/Get Sub-Category/getSubCategory.js")
+var FetchAllSubCategory = require("./Sub Category/GetAllSubCategory/getAllSubCategory.js")
+var UpdateSubCategory = require("./Sub Category/Update Sub-Category/updateSubCategory.js")
+var RemoveSubCategory = require("./Sub Category/Remove Sub-Category/removeSubCategory.js")
 // var Payment = require("./Payment/payment.js")
 var NewFile = require("./Payment/Newfile.js")
 require('dotenv').config();
@@ -145,6 +150,11 @@ app.use("/api/users", fetchAllCart)
 app.use("/api/users", fetchCart)
 app.use("/api/users", fetchCartByProductCode)
 app.use("/api/users", Payment);
+app.use("/api/users", CreateSubCategory);
+app.use("/api/users", FetchSubCategory);
+app.use("/api/users", FetchAllSubCategory);
+app.use("/api/users", RemoveSubCategory);
+app.use("/api/users", UpdateSubCategory);
 // app.use("/api/users", PhonePe)
 app.use("/api/users", NewFile)
 

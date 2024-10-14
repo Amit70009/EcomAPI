@@ -2,7 +2,7 @@ var CategorySchema = require("./categoryModel").CategoryModel
 var { CategoryModel } = require("./categoryModel.js")
 var CommonFunc = require("../../Common Function/commonfunction.js");
 
-async function AddCategory(data){
+async function AddCategory(data, categoryImages){
     try {
         var checkCategory = await CategoryModel.findOne({
             $or: [
@@ -25,6 +25,7 @@ async function AddCategory(data){
 
         var categoryCreate = {
             category_id: data.category_id,
+            category_image: categoryImages,
     category_name: data.category_name,
     category_subcategory: data.category_subcategory,
     isCategoryEnable: data.isCategoryEnable,
@@ -128,6 +129,7 @@ async function UpdateCategory(CategoryID, data){
         }, {
             $set:{
                 category_name: data.category_name,
+                category_image: categoryImages,
                 category_subcategory: data.category_subcategory,
                 isCategoryEnable: data.isCategoryEnable
             }
