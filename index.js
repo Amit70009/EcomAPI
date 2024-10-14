@@ -97,9 +97,6 @@ const authenticateApiKey = (req, res, next) => {
   next(); // Continue to the next middleware or route
 };
 
-
-  
-
 app.use(authenticateApiKey);
 app.use("/api/users", UserLogin);
 app.use("/api/users", RegisterUser);
