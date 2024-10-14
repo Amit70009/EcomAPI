@@ -1,6 +1,6 @@
 var mongoUrl = "mongodb+srv://EcommApp:f6VZGWiTQM75xnZg@e-commerce.jkid7lq.mongodb.net/?retryWrites=true&w=majority"; // Paste cloud mongo url
 var portNo = 7383;
-var bcrypt = require("bcrypt");
+var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
 async function encryptPassword(password){
